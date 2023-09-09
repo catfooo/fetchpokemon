@@ -76,20 +76,20 @@ fetchPokemonsWithLimit();
 //    we will create a new fetch inside the fetchBulbasaurData
 //    function (change the function's name to fit your pokemon).
 //    Log the data in the console and see what you find.
-const fetchBulbasaurData = () => {
-  const pokemonUrl = "https://pokeapi.co/api/v2/pokemon/1/";
+// const fetchBulbasaurData = () => {
+//   const pokemonUrl = "https://pokeapi.co/api/v2/pokemon/1/";
 
-  fetch(pokemonUrl)
-    .then((response) => response.json())
-    .then((data) => {
-      // Log the data for Bulbasaur or the specified Pokémon
-      console.log(data);
-    })
-    .catch((error) => console.error("Error fetching Pokémon data:", error));
-};
+//   fetch(pokemonUrl)
+//     .then((response) => response.json())
+//     .then((data) => {
+//       // Log the data for Bulbasaur or the specified Pokémon
+//       console.log(data);
+//     })
+//     .catch((error) => console.error("Error fetching Pokémon data:", error));
+// };
 
-// Invoke the fetchBulbasaurData function to fetch data for Bulbasaur
-fetchBulbasaurData();
+// // Invoke the fetchBulbasaurData function to fetch data for Bulbasaur
+// fetchBulbasaurData();
 
 
 // 5) After familiarizing with the data, we will use the data
@@ -99,6 +99,35 @@ fetchBulbasaurData();
 //    image.src = json.sprites.front_default;
 //    Copy that line into the fetchBulbasaurData and hopefully
 //    the image in the HTML updates.
+
+const fetchBulbasaurData = () => {
+  const pokemonUrl = "https://pokeapi.co/api/v2/pokemon/1/";
+
+  fetch(pokemonUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // Log the data for Bulbasaur or the specified Pokémon
+      console.log(data);
+
+      // Update the image source with the front_default sprite
+      const image = document.getElementById("image");
+      image.src = data.sprites.front_default;
+
+      // Update other table rows with Pokémon data
+      document.getElementById("name").innerText = data.name;
+      document.getElementById("weight").innerText = data.weight;
+      document.getElementById("height").innerText = data.height;
+
+      // Assuming 'types' is an array of type objects with a 'name' property
+      const types = data.types.map((typeData) => typeData.type.name).join(", ");
+      document.getElementById("types").innerText = types;
+    })
+    .catch((error) => console.error("Error fetching Pokémon data:", error));
+};
+
+// Invoke the fetchBulbasaurData function to fetch data for Bulbasaur
+fetchBulbasaurData();
+
 
 // 6) Update the innerHTML of the other rows as well after
 //    you've found the correct path in the json.
