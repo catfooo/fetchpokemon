@@ -121,6 +121,11 @@ const fetchBulbasaurData = () => {
       // Assuming 'types' is an array of type objects with a 'name' property
       const types = data.types.map((typeData) => typeData.type.name).join(", ");
       document.getElementById("types").innerText = types;
+      // Update the Pokémon's abilities
+      const abilitiesElement = document.getElementById("abilities");
+      const abilities = data.abilities.map((abilityData) => abilityData.ability.name).join(", ");
+      abilitiesElement.innerText = abilities;
+      document.getElementById("baseexperience").innerText = data.base_experience;
     })
     .catch((error) => console.error("Error fetching Pokémon data:", error));
 };
