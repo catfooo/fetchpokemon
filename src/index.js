@@ -126,6 +126,10 @@ const fetchBulbasaurData = () => {
       const abilities = data.abilities.map((abilityData) => abilityData.ability.name).join(", ");
       abilitiesElement.innerText = abilities;
       document.getElementById("baseexperience").innerText = data.base_experience;
+      // Update the Pokémon's forms
+      const formsElement = document.getElementById("forms");
+      const forms = data.forms.map((formData) => formData.name).join(", ");
+      formsElement.innerText = forms;
     })
     .catch((error) => console.error("Error fetching Pokémon data:", error));
 };
