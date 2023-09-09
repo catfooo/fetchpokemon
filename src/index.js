@@ -26,6 +26,10 @@ const fetchPokemons = () => {
       // Log the entire array of Pokémon objects
       console.log(data.results);
 
+      //    b) Log only the name of the first pokemon in the
+      //    pokemon objects array
+      console.log(data.results[0].name);
+
       // Log the names of all Pokémon in the array
       const pokemonNames = data.results.map((pokemon) => pokemon.name);
       console.log(pokemonNames);
@@ -52,15 +56,41 @@ fetchPokemons();
 //    and pick a pokemon that you would like to continue
 //    working with. Copy the pokemon's URL.
 
+const fetchPokemonsWithLimit = () => {
+  const limit = 151; // Set your desired limit here
+  fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Log the array of Pokémon objects
+      console.log(data.results);
+    })
+    .catch((error) => console.error("Error fetching Pokémon:", error));
+};
+
+// Use the new function to fetch Pokémon with the limit specified inside
+fetchPokemonsWithLimit();
+
+
 // 4) Now that we've picked a pokemon, we will do a new fetch
 //    to the URL we copied. Since that's another endpoint,
 //    we will create a new fetch inside the fetchBulbasaurData
 //    function (change the function's name to fit your pokemon).
 //    Log the data in the console and see what you find.
-
 const fetchBulbasaurData = () => {
-  /*Fetch singular pokemon here*/
+  const pokemonUrl = "https://pokeapi.co/api/v2/pokemon/1/";
+
+  fetch(pokemonUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // Log the data for Bulbasaur or the specified Pokémon
+      console.log(data);
+    })
+    .catch((error) => console.error("Error fetching Pokémon data:", error));
 };
+
+// Invoke the fetchBulbasaurData function to fetch data for Bulbasaur
+fetchBulbasaurData();
+
 
 // 5) After familiarizing with the data, we will use the data
 //    to change our table. We will give you the image as a start.
